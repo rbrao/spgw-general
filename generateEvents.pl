@@ -4,14 +4,14 @@ use Data::Random qw(:all);
 use Getopt::Long;
 use JSON;
 
-my @severity = qw(WARNING INFO CRITICAL);
-my @eventType = qw(CREATE);
-my @eventStatus = qw(OPEN);
-my @alertSummary;
-my @alertNotes;
-my @eventSource = qw(Solarwinds Nagios Zabbix Site24x7 PRTG Elasticsearch Logstash Datadog Splunk Dynatrace NewRelic);
-my @serviceName;
-my @eventGroups = qw(DB Linux Windows Network App1 App2 App3 Svc1 Svc2 Svc3 Storage Vmware AWS GCP Azure);
+our @severity = qw(WARNING INFO CRITICAL);
+our @eventType = qw(CREATE);
+our @eventStatus = qw(OPEN);
+#our @alertSummary;
+#our @alertNotes;
+our @eventSource = qw(Solarwinds Nagios Zabbix Site24x7 PRTG Elasticsearch Logstash Datadog Splunk Dynatrace NewRelic);
+#our @serviceName;
+our @eventGroups = qw(DB Linux Windows Network App1 App2 App3 Svc1 Svc2 Svc3 Storage Vmware AWS GCP Azure);
 
 my ($verbose, $usage, $url, $count);
 GetOptions ( 'v|verbose' => \$verbose, 'h|help' => \$usage, 'url:s' => \$url, 'count:s' => \$count );
@@ -51,7 +51,7 @@ my $json_string = JSON->new->utf8->encode( {
 	alertSummary => join(' ', @alertSummary),
 	alertNotes => join(' ', @alertNotes),
 	eventSource => $rand_eventSource,
-	serviceName => @serviceName,
+	serviceName => join(' ', @serviceName),
 	eventID => $eventID,
 	eventGroups => $rand_eventGroups,
 	eventStatus => $rand_eventStatus
