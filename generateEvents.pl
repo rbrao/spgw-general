@@ -48,7 +48,8 @@ sub randomEvent {
 		eventStatus => $rand_eventStatus
 	} );
 	print "{\"event\"\: $json_string }\n" if (defined $verbose);
-	print "$curlCommand $curlOptions \'{\"event\"\: $json_string }\' $url\n";
+	my $out = qx($curlCommand $curlOptions '{"event": $json_string }' $url 2>/dev/null);	chomp($out);
+	print "$out\n";
 }
 
 __END__
