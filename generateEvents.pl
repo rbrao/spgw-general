@@ -4,7 +4,7 @@ use Data::Random qw(:all);
 use Getopt::Long;
 use JSON;
 
-our $min_datetime = '2023-01-01';
+our $min_datetime = '2023-04-01';
 our @severity = qw(WARNING INFO CRITICAL);
 our @eventType = qw(CREATE);
 our @eventStatus = qw(OPEN);
@@ -13,7 +13,7 @@ our @eventGroups = qw(DB Linux Windows Network App1 App2 App3 Svc1 Svc2 Svc3 Sto
 
 our ($verbose, $usage, $url, $count);
 our $curlCommand = "/usr/bin/curl -ks ";
-our $curlOptions = "--json ";
+our $curlOptions = "--connect-timeout 10 --json ";
 GetOptions ( 'v|verbose' => \$verbose, 'h|help' => \$usage, 'url:s' => \$url, 'count:s' => \$count );
 do { print "USAGE: $0 -url <url of event sources handler> -count <#of events to generate>\n"; exit(0) } if ( (defined $usage) || (not defined $url) || (not defined $count) );
 
